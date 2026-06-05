@@ -9,9 +9,9 @@ ENV PORT=10000
 WORKDIR /app
 EXPOSE 10000
 
-# Fix: Explicitly injects allowedOrigins wildcards and arrays to bypass the security wall
+# Fix: Changes mode to "public" to trust any incoming device that has your correct token password
 CMD mkdir -p /root/.openclaw/agents/dev/agent && \
     echo "{\"openai\": {\"apiKey\": \"$OPENAI_API_KEY\", \"baseURL\": \"https://openrouter.ai\"}}" > /root/.openclaw/agents/dev/agent/auth-profiles.json && \
-    echo "{\"gateway\": {\"mode\": \"local\", \"bind\": \"lan\", \"port\": 10000, \"auth\": {\"mode\": \"token\", \"token\": \"my_secret_password_123\"}, \"controlUi\": {\"allowedOrigins\": [\"*\", \"http://localhost:5173\", \"null\", \"vscode-webview://\"]}}}" > /root/.openclaw/openclaw.json && \
+    echo "{\"gateway\": {\"mode\": \"public\", \"bind\": \"lan\", \"port\": 10000, \"auth\": {\"mode\": \"token\", \"token\": \"UsmanAgent@412044\"}, \"controlUi\": {\"allowedOrigins\": [\"*\", \"http://localhost:5173\", \"null\", \"vscode-webview://\"]}}}" > /root/.openclaw/openclaw.json && \
     chmod -R 777 /root/.openclaw && \
     openclaw gateway
