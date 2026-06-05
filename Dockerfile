@@ -14,5 +14,5 @@ EXPOSE 10000
 CMD mkdir -p /root/.openclaw/agents/dev/agent && \
     echo "{\"openai\": {\"apiKey\": \"$OPENAI_API_KEY\", \"baseURL\": \"https://openrouter.ai\"}}" > /root/.openclaw/agents/dev/agent/auth-profiles.json && \
     chmod -R 777 /root/.openclaw && \
-    openclaw gateway
+    openclaw gateway --allow-unconfigured
 
