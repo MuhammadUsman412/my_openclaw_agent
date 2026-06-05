@@ -13,5 +13,7 @@ EXPOSE 10000
 CMD mkdir -p /root/.openclaw/agents/dev/agent && \
     echo "{\"openai\": {\"apiKey\": \"$OPENAI_API_KEY\", \"baseURL\": \"https://openrouter.ai\"}}" > /root/.openclaw/agents/dev/agent/auth-profiles.json && \
     echo "{\"gateway\": {\"mode\": \"local\", \"bind\": \"lan\", \"port\": 10000, \"auth\": {\"mode\": \"token\", \"token\": \"UsmanAgent@412044\"}, \"controlUi\": {\"dangerouslyAllowHostHeaderOriginFallback\": true, \"allowedOrigins\": [\"app://localhost\", \"http://localhost:5173\", \"vscode-webview://\", \"null\"]}}}" > /root/.openclaw/openclaw.json && \
+    echo "{\"devices\": {\"b46fc636-1351-4f19-b191-1f0244b7d82d\": {\"id\": \"b46fc636-1351-4f19-b191-1f0244b7d82d\", \"name\": \"Windows Companion\", \"approved\": true, \"addedAt\": 1717571811000}}}" > /root/.openclaw/devices.json && \
+    echo "{\"devices\": {\"b3cdb561-da8e-4c32-a9d6-f2b8303d2739\": {\"id\": \"b3cdb561-da8e-4c32-a9d6-f2b8303d2739\", \"name\": \"Windows Companion\", \"approved\": true, \"addedAt\": 1717571811000}}}" > /root/.openclaw/devices.json && \
     chmod -R 777 /root/.openclaw && \
     openclaw gateway
