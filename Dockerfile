@@ -9,8 +9,9 @@ ENV PORT=10000
 WORKDIR /app
 EXPOSE 10000
 
-# Fix: Drops complex manual JSON strings and uses official flags to force a public unconfigured boot
+# Fix: Drops the invalid "start" subcommand and passes --allow-unconfigured correctly to the gateway execution line
 CMD mkdir -p /root/.openclaw/agents/dev/agent && \
     echo "{\"openai\": {\"apiKey\": \"$OPENAI_API_KEY\", \"baseURL\": \"https://openrouter.ai\"}}" > /root/.openclaw/agents/dev/agent/auth-profiles.json && \
+    echo "{\"gateway\": {\"mode\": \"local\", \"bind\": \"lan\", \"port\": 10000, \"auth\": {\"mode\": \"token\", \"token\": \"UsmanAgent@412044\"}}}" > /root/.openclaw/openclaw.json && \
     chmod -R 777 /root/.openclaw && \
-    openclaw gateway start --allow-unconfigured
+    openclaw gateway --allow-unconfigured
