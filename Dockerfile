@@ -9,9 +9,8 @@ ENV PORT=10000
 WORKDIR /app
 EXPOSE 10000
 
-# Fix: Drops the invalid "start" subcommand and passes --allow-unconfigured correctly to the gateway execution line
+# Fix: Drops the complex JSON strings and tells OpenClaw to trust all incoming origins via the official Host-Header fallback flag
 CMD mkdir -p /root/.openclaw/agents/dev/agent && \
     echo "{\"openai\": {\"apiKey\": \"$OPENAI_API_KEY\", \"baseURL\": \"https://openrouter.ai\"}}" > /root/.openclaw/agents/dev/agent/auth-profiles.json && \
-    echo "{\"gateway\": {\"mode\": \"local\", \"bind\": \"lan\", \"port\": 10000, \"auth\": {\"mode\": \"token\", \"token\": \"UsmanAgent@412044\"}}}" > /root/.openclaw/openclaw.json && \
     chmod -R 777 /root/.openclaw && \
-    openclaw gateway --allow-unconfigured
+    openclaw gateway --allow-unconfigured --dangerously-allow-host-header-origin-fallback
