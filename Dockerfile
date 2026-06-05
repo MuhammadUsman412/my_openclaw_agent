@@ -9,9 +9,8 @@ ENV PORT=10000
 WORKDIR /app
 EXPOSE 10000
 
-# Fix: Sets up a pristine openclaw.json with a master token override to completely disable device checks
+# Fix: Drops complex manual JSON strings and uses official flags to force a public unconfigured boot
 CMD mkdir -p /root/.openclaw/agents/dev/agent && \
     echo "{\"openai\": {\"apiKey\": \"$OPENAI_API_KEY\", \"baseURL\": \"https://openrouter.ai\"}}" > /root/.openclaw/agents/dev/agent/auth-profiles.json && \
-    echo "{\"gateway\": {\"mode\": \"local\", \"bind\": \"lan\", \"port\": 10000, \"trustProxy\": true, \"auth\": {\"mode\": \"token\", \"token\": \"UsmanAgent@412044\"}, \"controlUi\": {\"allowedOrigins\": [\"*\", \"http://localhost:5173\", \"null\", \"vscode-webview://\"]}}}" > /root/.openclaw/openclaw.json && \
     chmod -R 777 /root/.openclaw && \
-    openclaw gateway
+    openclaw gateway start --allow-unconfigured
