@@ -13,7 +13,6 @@ EXPOSE 10000
 
 CMD mkdir -p /root/.openclaw/agents/dev/agent && \
     echo "{\"openai\": {\"apiKey\": \"$OPENAI_API_KEY\", \"baseURL\": \"https://openrouter.ai\"}}" > /root/.openclaw/agents/dev/agent/auth-profiles.json && \
-    echo "{\"gateway\": {\"mode\": \"local\", \"bind\": \"lan\", \"port\": 10000, \"auth\": {\"mode\": \"token\", \"token\": \"UsmanAgent@412044\"}, \"controlUi\": {\"dangerouslyAllowHostHeaderOriginFallback\": true, \"allowedOrigins\": [\"app://localhost\", \"http://localhost:5173\", \"vscode-webview://\", \"null\"]}}}" > /root/.openclaw/openclaw.json && \
     chmod -R 777 /root/.openclaw && \
     openclaw gateway
 
